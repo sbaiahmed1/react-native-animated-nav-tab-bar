@@ -16,7 +16,6 @@ import {
 import { CommonActions, Descriptor, NavigationState, PartialState, Route, TabNavigationState } from "@react-navigation/native";
 import { IAppearanceOptions, TabElementDisplayOptions } from "./types";
 import React, { useEffect, useState } from "react";
-import { I18nManager } from "react-native";
 
 import ResourceSavingScene from "./ResourceSavingScene";
 import { ScreenContainer } from "react-native-screens";
@@ -28,6 +27,7 @@ interface TabBarElementProps {
   appearance: IAppearanceOptions;
   tabBarOptions?: any;
   lazy?: boolean;
+  isRTL?: boolean
 }
 
 /**
@@ -50,6 +50,7 @@ export default ({
   appearance,
   tabBarOptions,
   lazy,
+  isRTL
 }: TabBarElementProps) => {
   // Apprearence options destruction
   const {
@@ -196,7 +197,7 @@ export default ({
    * @returns React.Node with the button component
    */
   const createTab = (
-    route: (Route<string> & { state?: NavigationState | PartialState<NavigationState> | undefined; }), 
+    route: (Route<string> & { state?: NavigationState | PartialState<NavigationState> | undefined; }),
     routeIndex: number
   ) => {
     const focused = routeIndex == state.index;
@@ -443,7 +444,7 @@ export default ({
               topPadding={topPadding}
               activeTabBackground={activeTabBackground}
               style={
-                I18nManager.isRTL
+                isRTL
                   ? {
                     right: animatedPos.interpolate({
                       inputRange: [0, 1],

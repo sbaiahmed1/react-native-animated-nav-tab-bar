@@ -40,7 +40,8 @@ interface IBottomTabNavigatorProps {
   children: React.ReactNode;
   screenOptions?: any;
   tabBarOptions?: any;
-  appearance: Partial<IAppearanceOptions>;  
+  appearance: Partial<IAppearanceOptions>;
+  isRTL?: boolean
 }
 
 const BottomTabNavigator = ({
@@ -49,10 +50,11 @@ const BottomTabNavigator = ({
   children,
   screenOptions,
   tabBarOptions,
+  isRTL,
   appearance,
   ...rest
 }: IBottomTabNavigatorProps) => {
-  
+
   const { state, descriptors, navigation } = useNavigationBuilder(TabRouter, {
     initialRouteName,
     backBehavior,
@@ -73,6 +75,7 @@ const BottomTabNavigator = ({
   return (
     <TabBarElement
       {...rest}
+      isRTL={isRTL}
       state={state}
       navigation={navigation}
       descriptors={descriptors}
